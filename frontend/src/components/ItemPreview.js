@@ -4,6 +4,7 @@ import agent from "../agent";
 import { connect } from "react-redux";
 import { ITEM_FAVORITED, ITEM_UNFAVORITED } from "../constants/actionTypes";
 
+const fallbackImage = '/placeholder.png';
 const mapDispatchToProps = (dispatch) => ({
   favorite: (slug) =>
     dispatch({
@@ -16,7 +17,6 @@ const mapDispatchToProps = (dispatch) => ({
       payload: agent.Items.unfavorite(slug),
     }),
 });
-
 const ItemPreview = (props) => {
   const item = props.item;
 
@@ -28,7 +28,6 @@ const ItemPreview = (props) => {
       props.favorite(item.slug);
     }
   };
-
   return (
     <div
       className="card bg-dark border-light p-3"
@@ -36,7 +35,7 @@ const ItemPreview = (props) => {
     >
       <img
         alt="item"
-        src={item.image}
+        src={item.image || fallbackImage}
         className="card-img-top item-img"
         style={{ borderRadius: "20px" }}
       />
